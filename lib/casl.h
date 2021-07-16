@@ -12,7 +12,7 @@
 #define TO_COUNT   16   // 28bytes
 #define SEQ_COUNT  8    // 16bytes
 #define SEQ_LENGTH 8    // 4bytes
-#define DYN_COUNT  200   // 8bytes
+#define DYN_COUNT  201   // 8bytes
 
 typedef enum{ ToLiteral
             , ToRecur
