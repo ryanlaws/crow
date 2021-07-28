@@ -80,9 +80,11 @@ uint8_t event_post( event_t *e ) {
     );
 
     if( !status ){
-        sprintf(str, "event queue full! putIdx:%i\n", putIdx)
-        printf(str);
-        Caw_send_luachunk(str);
+        //sprintf(str, "event queue full! putIdx:%i\n", putIdx)
+        //printf(str);
+        //Caw_send_luachunk(str);
+        printf("rest in peace queue");
+        Caw_send_luachunk("rest in peace queue");
     }
 
     return status;
