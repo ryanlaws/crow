@@ -62,6 +62,7 @@ void event_next( void ){
 // add event to queue, return success status
 uint8_t event_post( event_t *e ) {
     uint8_t status = 0;
+    char str[50];
 
     BLOCK_IRQS(
         // increment write idx, posbily wrapping
@@ -79,8 +80,9 @@ uint8_t event_post( event_t *e ) {
     );
 
     if( !status ){
-        printf("event queue full! putIdx:%i\n", putIdx);
-        Caw_send_luachunk("event queue full!");
+        sprintf(str, "event queue full! putIdx:%i\n", putIdx)
+        printf(str);
+        Caw_send_luachunk(str);
     }
 
     return status;
