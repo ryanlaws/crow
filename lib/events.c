@@ -9,7 +9,8 @@
 
 /// NOTE: if we are ever over-filling the event queue, we have problems.
 /// making the event queue bigger not likely to solve the problems.
-#define MAX_EVENTS   40
+// ... buuut I'm gonna try it anyway - RL 
+#define MAX_EVENTS   120
 
 // macro for incrementing an index into a circular buffer.
 #define INCR_EVENT_INDEX( x )  { if ( ++x == MAX_EVENTS ) x = 0; }
