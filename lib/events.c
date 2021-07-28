@@ -46,6 +46,7 @@ void events_clear(void)
 // returns non-zero if an event was available
 void event_next( void ){
     event_t* e = NULL;
+    char str[80];
 
     BLOCK_IRQS(
         // if pointers are equal, the queue is empty... don't allow idx's to wrap!
@@ -55,14 +56,17 @@ void event_next( void ){
         }
     );
 
-    if( e != NULL ){ (*e->handler)(e); } // call the event handler after enabling IRQs
+    if( e != NULL ){
+        (*e->handler)(e);
+        sprintf(str, "sent next event to handler from getIdx:%i",  getIdx);
+    } // call the event handler after enabling IRQs
 }
 
 
 // add event to queue, return success status
 uint8_t event_post( event_t *e ) {
     uint8_t status = 0;
-    char str[50];
+    char str[80];
 
     BLOCK_IRQS(
         // increment write idx, posbily wrapping
@@ -80,8 +84,8 @@ uint8_t event_post( event_t *e ) {
     );
 
     if( !status ){
-        sprintf(str, "event queue full! putIdx:%i\n", putIdx);
-        printf(str);
+        sprintf(str, "event queue full! putIdx:%i, getIdx:%i", putIdx, getIdx);
+        printf("%s\n", str);
         Caw_send_luachunk(str);
         //printf("rest in peace queue");
         //Caw_send_luachunk("rest in peace queue");
