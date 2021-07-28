@@ -80,7 +80,7 @@ uint8_t event_post( event_t *e ) {
     );
 
     if( !status ){
-        printf("event queue full!\n");
+        printf("event queue full! putIdx:%i\n", putIdx);
         Caw_send_luachunk("event queue full!");
     }
 
